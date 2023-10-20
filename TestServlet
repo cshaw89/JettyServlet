@@ -1,0 +1,149 @@
+package jettyServlets;
+
+import org.eclipse.jetty.util.IO;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.File;
+
+public class TestServlet extends HttpServlet {
+    @Override
+    public void init() throws ServletException {
+        System.out.println("starting test serverlet: ");
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<h1>GET Request Form</h1>");
+        out.println("<form method='post'>");
+        out.println("Name: <input type='text' name='name'><br>");
+        out.println("Message: <textarea name='message'></textarea><br>");
+        out.println("<input type='submit' value='Submit'>");
+        out.println("</form>");
+    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse repsonse) throws ServletException, IOException {
+
+        repsonse.setContentType("text/html");
+        PrintWriter out = repsonse.getWriter();
+
+        String name = request.getParameter("name");
+        String message = request.getParameter("message");
+
+        out.println("<h1>POST Request Data</h1>");
+        out.println("<p>Name: " + name + "</p>");
+        out.println("<p>Message: " + message + "</p>");
+        out.println("This request has been sent to the server, thank you!");
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//    private void handleGetRequest(HttpServletRequest req, HttpServletResponse resp)  throws ServletException, IOException {
+//        resp.setContentType("text/html");
+//        PrintWriter out = resp.getWriter();
+//    }
+//
+//    private void handlePostRequest(HttpServletRequest req, HttpServletResponse resp) throws  ServletException, IOException {
+//        resp.setContentType("text/html");
+//        PrintWriter out = resp.getWriter();
+//
+//    }
+//
+//
+//    public void doResponse(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//
+//
+//
+//        resp.setContentType("text/html");
+//        PrintWriter out = resp.getWriter();
+//
+//        // Read the content of the "index.html" file and write it to the response
+//        try {
+//            String htmlContent = new String(Files.readAllBytes(Paths.get("C:\\temp\\jetty-base\\webapps\\testservlet\\index.html")));
+//            out.println(htmlContent);
+//        } catch (IOException e) {
+//            out.println("Error reading index.html: " + e.getMessage());
+//        }
+//
+//        if (req.getMethod().equals("POST")) {
+//            doGet(req, resp);
+//
+//        } else {
+//            doPost(req,resp);
+//            }
+//        }
+//
+//
+//
+//    //  @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        doResponse(req, resp);
+//        if (req.getMethod().equals("GET")) {
+//
+//        }
+//
+//    }
+//
+//    // @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//
+//        PrintWriter out = resp.getWriter();
+//        String filePath = "C:\\temp\\jetty-base\\webapps\\testservlet\\";
+//
+//        try (PrintWriter fileWriter = new PrintWriter(filePath) ) {
+//            fileWriter.print("I am a post request");
+//        } catch (IOException e) {
+//            out.println("error writing to file   " + e.getMessage());
+//        }
+//
+////        File file = new File ("c:/temp/fileoutput.txt");
+////        PrintWriter printWriter = new PrintWriter("fileoutput.txt");
+////        printWriter.print(resp.getWriter());
+//       // if (req.getMethod().equals("POST")) {
+//            String name = req.getParameter("name");
+//            String message = req.getParameter("message");
+////
+////            out.println("<h1> POST Request Data</h1>");
+////            out.println("<p>Name: " + name + "</p>");
+////            out.println("<p> message:" + message + "</p>");
+////            out.println("This request has been sent to the server, thank you!");
+////            System.out.println("Request has been sent to server: ");
+//            System.out.println(name);
+//            System.out.println(message);
+//            System.out.println("I am a post request");
+//
+//        }
+//
+//
+//
+//}
